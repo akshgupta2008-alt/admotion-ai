@@ -1,5 +1,7 @@
 # AdMotion AI — Turn Text Prompts into High-Converting Animated Ads
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/akshgupta2008-alt/admotion-ai)
+
 **AdMotion AI** is a production-grade AI advertising creation studio web application. It transforms product concepts into commercial marketing hooks, persuasive voiceover scripts, scene-by-scene cinematic storyboards, and production-ready prompts for OpenAI Sora, Runway Gen-3, Luma Dream Machine, and Midjourney.
 
 ---
