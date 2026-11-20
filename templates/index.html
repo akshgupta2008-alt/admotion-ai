@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdMotion AI — Prompt-to-Video Advertising Studio</title>
+  <meta name="description" content="Transform text prompts into high-converting animated advertisements, cinematic storyboards, and production prompts for Sora and Runway.">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238B5CF6'><polygon points='5 3 19 12 5 21 5 3'/></svg>">
+</head>
+<body>
+
+  <!-- Ambient Atmospheric Lighting -->
+  <div class="bg-mesh"></div>
+  <div class="bg-grid-overlay"></div>
+
+  <!-- Main Navigation Bar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="#" class="brand-logo">
+        <div class="logo-icon-wrapper">
+          <svg fill="currentColor" viewBox="0 0 24 24">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+        </div>
+        <span class="brand-name">
+          AdMotion <span class="text-gradient">AI</span>
+          <span class="brand-badge">STUDIO</span>
+        </span>
+      </a>
+
+      <ul class="nav-links">
+        <li class="nav-item active" data-target="landing">Overview</li>
+        <li class="nav-item" data-target="studio">Ad Creator</li>
+        <li class="nav-item" data-target="templates">Templates</li>
+        <li class="nav-item" data-target="projects">
+          Projects <span class="count-badge" id="projectsCountBadge">3</span>
+        </li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn btn-secondary btn-sm" onclick="document.querySelector('[data-target=templates]').click()">
+          Browse Templates
+        </button>
+        <button class="btn btn-primary btn-sm btn-launch-studio">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          Launch Studio
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Application Container -->
+  <main class="app-container">
+
+    <!-- =========================================================
+         VIEW 1: LANDING PAGE & OVERVIEW
+         ========================================================= -->
+    <section id="view-landing" class="view-section active">
+      <div class="landing-hero">
+        <div class="hero-pill">
+          <span class="pulse-dot"></span>
+          <span>Next-Gen Advertising Intelligence v2.4</span>
+        </div>
+        
+        <h1 class="hero-title">
+          Turn Text Prompts into <br>
+          <span class="text-gradient">High-Converting</span> Animated Ads
+        </h1>
+
+        <p class="hero-desc">
+          AdMotion AI automates end-to-end commercial production. Transform an idea into persuasive marketing hooks, full voiceover scripts, scene-by-scene cinematic storyboards, and optimized video prompts for Sora, Runway Gen-3, and Luma.
+        </p>
+
+        <div class="hero-cta-group">
+          <button class="btn btn-primary btn-lg btn-launch-studio">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            Start Creating Ads Free
+          </button>
+          <button class="btn btn-secondary btn-lg" onclick="document.querySelector('[data-target=projects]').click()">
+            Explore Showcase Ads
+          </button>
+        </div>
+
+        <!-- Interactive Live Teaser Box -->
+        <div class="interactive-teaser-card">
+          <div class="teaser-input-row">
+            <svg width="22" height="22" fill="none" stroke="#8B5CF6" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+            </svg>
+            <input type="text" id="teaserPromptInput" placeholder="Describe your product... e.g. Cyberpunk noise-cancelling headphones with bioluminescent light">
+            <button class="btn btn-primary" id="teaserGenerateBtn">
+              Instant Generate
+            </button>
+          </div>
+
+          <div class="teaser-chips">
+            <span class="teaser-chip-label">Try an example:</span>
+            <button class="prompt-chip" data-brand="Chrono Noir" data-prompt="Haute horlogerie tourbillon luxury watch forged from meteorite ore and sapphire crystal under warm candlelight.">
+              ⌚ Luxury Meteorite Watch
+            </button>
+            <button class="prompt-chip" data-brand="VoltDrive" data-prompt="Zero-sugar nootropic energy drink exploding through crystalline ice cubes with neon cyan sparks.">
+              ⚡ VoltDrive Energy
+            </button>
+            <button class="prompt-chip" data-brand="Aura Labs" data-prompt="Futuristic liquid titanium smart ring mapping brain neuroplasticity during deep sleep.">
+              💍 Neural Smart Ring
+            </button>
+            <button class="prompt-chip" data-brand="Lumina Skin" data-prompt="Cold-pressed coastal marine algae restorative facial elixir in frosted dropper bottle.">
+              🌿 Clean Botanical Serum
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Metrics Ribbon -->
+      <div class="stats-ribbon">
+        <div class="stat-item">
+          <h4>250K+</h4>
+          <p>Commercials Synthesized</p>
+        </div>
+        <div class="stat-item">
+          <h4>4.8x</h4>
+          <p>Higher Video ROAS</p>
+        </div>
+        <div class="stat-item">
+          <h4>12s</h4>
+          <p>Average Storyboard Generation</p>
+        </div>
+        <div class="stat-item">
+          <h4>99.4%</h4>
+          <p>Prompt Precision Match</p>
+        </div>
+      </div>
+
+      <!-- Core Capabilities Grid -->
+      <div class="features-section">
+        <div class="section-header">
+          <div class="section-subtitle">Complete Production Pipeline</div>
+          <h2 class="section-title">Built for Performance Marketers & Creative Directors</h2>
+          <p style="color: var(--text-secondary);">From raw prompt to cinematic commercial storyboard in seconds with complete camera direction.</p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card glass-glow">
+            <div class="feature-icon">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <h3>High-Converting Hooks</h3>
+            <p>Employs proven pattern interrupts, curiosity gaps, and status transformation psychology to stop viewers in the first 3 seconds.</p>
+          </div>
+
+          <div class="feature-card glass-glow">
+            <div class="feature-icon">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <h3>Multi-Ratio Formats</h3>
+            <p>One-click framing for 9:16 (TikTok, Instagram Reels, YouTube Shorts), 16:9 (Cinema, Desktop), and 1:1 (Social Feeds).</p>
+          </div>
+
+          <div class="feature-card glass-glow">
+            <div class="feature-icon">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+              </svg>
+            </div>
+            <h3>Universal Video Prompts</h3>
+            <p>Auto-engineers detailed prompt metadata formatted for OpenAI Sora, Runway Gen-3, Luma Dream Machine, and Midjourney.</p>
+          </div>
+
+          <div class="feature-card glass-glow">
+            <div class="feature-icon">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                <line x1="12" y1="19" x2="12" y2="23"></line>
+                <line x1="8" y1="23" x2="16" y2="23"></line>
+              </svg>
+            </div>
+            <h3>Voiceover & Music Engine</h3>
+            <p>Calculates voice pacing, syllable timing, sound effect cues, and synchronized subtitle tracks with browser audio preview.</p>
+          </div>
+
+          <div class="feature-card glass-glow">
+            <div class="feature-icon">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 14 14"></polyline>
+              </svg>
+            </div>
+            <h3>Precision Scene Timing</h3>
+            <p>Accurate scene allocations for 10s, 15s, 30s, and 60s formats with custom camera movements and transition specifications.</p>
+          </div>
+
+          <div class="feature-card glass-glow">
+            <div class="feature-icon">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+            </div>
+            <h3>Per-Scene Regeneration</h3>
+            <p>Iterate on individual shots without rewriting your entire script. Swap lighting, change drone angles, and refine prompts.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3-Step Workflow -->
+      <div class="workflow-section">
+        <div class="section-header">
+          <div class="section-subtitle">How It Works</div>
+          <h2 class="section-title">Zero to Commercial in Three Steps</h2>
+        </div>
+
+        <div class="steps-row">
+          <div class="step-card glass-panel">
+            <span class="step-number">STEP 01</span>
+            <h3 style="margin-bottom: 10px;">Input Concept & Preferences</h3>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">Enter your product idea or service hook. Select target duration, aspect ratio, visual aesthetic, and mood.</p>
+          </div>
+
+          <div class="step-card glass-panel">
+            <span class="step-number">STEP 02</span>
+            <h3 style="margin-bottom: 10px;">AI Synthesizes Campaign</h3>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">Our intelligence engine drafts the script, storyboards each scene, assigns camera trajectories, and synchronizes voiceover.</p>
+          </div>
+
+          <div class="step-card glass-panel">
+            <span class="step-number">STEP 03</span>
+            <h3 style="margin-bottom: 10px;">Interactive Preview & Export</h3>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">Preview the animated simulation with live audio narration, copy production prompts for Sora / Runway, or export printable storyboards.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         VIEW 2: AI AD CREATOR WORKSPACE
+         ========================================================= -->
+    <section id="view-studio" class="view-section">
+      <div class="workspace-header">
+        <div class="workspace-title-group">
+          <h2>
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="color: var(--primary-purple);">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            Ad Creator Workspace
+          </h2>
+          <p>Configure parameters and let AI direct your complete commercial campaign.</p>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-secondary btn-sm" id="btnSurpriseMe">
+            🎲 Surprise Me
+          </button>
+          <button class="btn btn-secondary btn-sm" id="btnEnhancePrompt">
+            ✨ Enhance Prompt
+          </button>
+        </div>
+      </div>
+
+      <div class="workspace-grid">
+        <!-- Main Form Column -->
+        <div class="workspace-main-form">
+          <div class="glass-panel form-card">
+            <!-- Prompt Box -->
+            <div class="form-group">
+              <label class="form-label" for="promptInput">
+                <span>Advertisement Concept & Product Description</span>
+                <span class="form-hint">Describe target audience, features & key offer</span>
+              </label>
+              <textarea id="promptInput" class="textarea-prompt" placeholder="e.g. Next-generation noise cancellation headphones with liquid crystal sound drivers, floating in a rainfall of neon lights for cyber commuters..."></textarea>
+            </div>
+
+            <!-- Brand Name -->
+            <div class="form-group">
+              <label class="form-label" for="brandInput">
+                <span>Brand or Product Name</span>
+                <span class="form-hint">Used in voiceover and packshot lockups</span>
+              </label>
+              <input type="text" id="brandInput" class="input-text" placeholder="e.g. Aetheria Audio">
+            </div>
+
+            <!-- Ad Duration -->
+            <div class="form-group">
+              <label class="form-label">
+                <span>Ad Duration</span>
+                <span class="form-hint">Select pacing length</span>
+              </label>
+              <div class="duration-selector">
+                <div class="duration-card" data-seconds="10">
+                  <span class="dur-sec">10s</span>
+                  <span class="dur-scenes">3 Scenes • Fast Hook</span>
+                </div>
+                <div class="duration-card" data-seconds="15">
+                  <span class="dur-sec">15s</span>
+                  <span class="dur-scenes">4 Scenes • Reels/Shorts</span>
+                </div>
+                <div class="duration-card active" data-seconds="30">
+                  <span class="dur-sec">30s</span>
+                  <span class="dur-scenes">5 Scenes • Standard TV</span>
+                </div>
+                <div class="duration-card" data-seconds="60">
+                  <span class="dur-sec">60s</span>
+                  <span class="dur-scenes">7 Scenes • Narrative Deep</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Aspect Ratio -->
+            <div class="form-group">
+              <label class="form-label">
+                <span>Aspect Ratio</span>
+                <span class="form-hint">Platform optimization</span>
+              </label>
+              <div class="ratio-selector">
+                <div class="ratio-card" data-ratio="9:16">
+                  <div class="ratio-icon-box" style="width: 14px; height: 24px;"></div>
+                  <span class="ratio-title">9:16 Vertical</span>
+                  <span class="ratio-desc">TikTok / Reels / Shorts</span>
+                </div>
+                <div class="ratio-card active" data-ratio="16:9">
+                  <div class="ratio-icon-box" style="width: 26px; height: 16px;"></div>
+                  <span class="ratio-title">16:9 Horizontal</span>
+                  <span class="ratio-desc">YouTube / Desktop / TV</span>
+                </div>
+                <div class="ratio-card" data-ratio="1:1">
+                  <div class="ratio-icon-box" style="width: 20px; height: 20px;"></div>
+                  <span class="ratio-title">1:1 Square</span>
+                  <span class="ratio-desc">Instagram / LinkedIn</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Visual Style -->
+            <div class="form-group">
+              <label class="form-label">
+                <span>Visual Aesthetic & Lighting</span>
+                <span class="form-hint">Directs cinematography</span>
+              </label>
+              <div class="styles-grid">
+                <div class="style-card active" data-style="Cinematic">
+                  <span class="style-indicator" style="background: #3B82F6;"></span>
+                  <div>
+                    <span class="style-name">Cinematic</span>
+                    <span class="style-desc">ARRI Alexa, 35mm film grain</span>
+                  </div>
+                </div>
+                <div class="style-card" data-style="Luxury">
+                  <span class="style-indicator" style="background: #F59E0B;"></span>
+                  <div>
+                    <span class="style-name">Luxury</span>
+                    <span class="style-desc">Chiaroscuro, warm gold amber</span>
+                  </div>
+                </div>
+                <div class="style-card" data-style="Futuristic">
+                  <span class="style-indicator" style="background: #8B5CF6;"></span>
+                  <div>
+                    <span class="style-name">Futuristic</span>
+                    <span class="style-desc">Cyberpunk neon, holograms</span>
+                  </div>
+                </div>
+                <div class="style-card" data-style="Realistic">
+                  <span class="style-indicator" style="background: #10B981;"></span>
+                  <div>
+                    <span class="style-name">Realistic</span>
+                    <span class="style-desc">Natural sunlight, documentary</span>
+                  </div>
+                </div>
+                <div class="style-card" data-style="3D Cartoon">
+                  <span class="style-indicator" style="background: #EC4899;"></span>
+                  <div>
+                    <span class="style-name">3D Cartoon</span>
+                    <span class="style-desc">Pixar stylized, tactile vinyl</span>
+                  </div>
+                </div>
+                <div class="style-card" data-style="Minimal">
+                  <span class="style-indicator" style="background: #94A3B8;"></span>
+                  <div>
+                    <span class="style-name">Minimal</span>
+                    <span class="style-desc">Bauhaus high-key studio</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mood Selector -->
+            <div class="form-group">
+              <label class="form-label">
+                <span>Campaign Mood</span>
+                <span class="form-hint">Shapes music & tone of voice</span>
+              </label>
+              <div class="mood-pills">
+                <span class="mood-pill active" data-mood="Energetic">⚡ Energetic</span>
+                <span class="mood-pill" data-mood="Premium">✨ Premium</span>
+                <span class="mood-pill" data-mood="Dramatic">🔥 Dramatic</span>
+                <span class="mood-pill" data-mood="Emotional">🌿 Emotional</span>
+                <span class="mood-pill" data-mood="Playful">🎉 Playful</span>
+              </div>
+            </div>
+
+            <!-- Audio Preferences -->
+            <div class="form-group">
+              <label class="form-label">
+                <span>Audio Direction</span>
+                <span class="form-hint">Soundtrack & narration</span>
+              </label>
+              <div class="audio-toggles-row">
+                <div class="toggle-card">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Voiceover Narration</span>
+                    <span class="toggle-desc">Generate spoken marketing script</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="toggleVO" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+
+                <div class="toggle-card">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Background Music Track</span>
+                    <span class="toggle-desc">Synthesize ambient soundscape</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="toggleBGM" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button class="btn btn-primary btn-generate-main" id="btnGenerateMain">
+              <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              Generate Advertisement Campaign
+            </button>
+          </div>
+        </div>
+
+        <!-- Sidebar Inspector Column -->
+        <aside class="workspace-sidebar">
+          <div class="glass-panel sidebar-card">
+            <h4>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+              Campaign Specs
+            </h4>
+            <ul class="spec-list">
+              <li class="spec-item">
+                <span>Duration:</span>
+                <span id="specDuration">30 seconds</span>
+              </li>
+              <li class="spec-item">
+                <span>Estimated Scenes:</span>
+                <span id="specScenes">5 scenes</span>
+              </li>
+              <li class="spec-item">
+                <span>Aspect Ratio:</span>
+                <span id="specRatio">16:9</span>
+              </li>
+              <li class="spec-item">
+                <span>Visual Style:</span>
+                <span id="specStyle">Cinematic</span>
+              </li>
+              <li class="spec-item">
+                <span>Tone & Mood:</span>
+                <span id="specMood">Energetic</span>
+              </li>
+              <li class="spec-item">
+                <span>Video Target:</span>
+                <span class="text-gradient">Sora / Runway Gen-3</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="glass-panel sidebar-card">
+            <h4>💡 Quick Ideas</h4>
+            <div class="inspiration-list">
+              <div class="inspire-item" data-brand="Kinetix Drone" data-prompt="Autonomous micro drone that follows rock climbers up vertical canyon walls in 8k slow motion.">
+                🧗 Alpine Micro-Drone
+              </div>
+              <div class="inspire-item" data-brand="Velvet Noir" data-prompt="Midnight smoked cedarwood and bourbon vanilla luxury perfume in an obsidian crystal flacon.">
+                🖤 Midnight Luxury Fragrance
+              </div>
+              <div class="inspire-item" data-brand="Synapse OS" data-prompt="Spatial AI computing glasses that render interactive holographic code in mid-air.">
+                👓 Holographic Computing Glasses
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         VIEW 3: GENERATION RESULTS WORKSPACE
+         ========================================================= -->
+    <section id="view-results" class="view-section">
+      <div class="results-header">
+        <div class="results-meta-row">
+          <div class="ad-badge-group">
+            <span class="ad-badge badge-primary" id="resultBrandBadge">AdMotion Flow</span>
+            <span class="ad-badge badge-cyan" id="resultRatioBadge">16:9</span>
+            <span class="ad-badge" id="resultDurationBadge">30s</span>
+            <span class="ad-badge" id="resultStyleBadge">Cinematic</span>
+          </div>
+
+          <div class="results-actions">
+            <button class="btn btn-secondary btn-sm" id="btnSaveProject">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                <polyline points="7 3 7 8 15 8"></polyline>
+              </svg>
+              Save Project
+            </button>
+            <button class="btn btn-secondary btn-sm" id="btnCopyAllPrompts">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              Copy All Prompts
+            </button>
+            <button class="btn btn-primary btn-sm" id="btnOpenExport">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Export Storyboard
+            </button>
+          </div>
+        </div>
+
+        <h1 class="ad-campaign-title" id="resultCampaignTitle">Campaign Title Loading...</h1>
+
+        <!-- Hook Card -->
+        <div class="hook-callout-card">
+          <div class="hook-content">
+            <div class="hook-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <div class="hook-text-box">
+              <h4>Marketing Hook (<span id="resultHookType">Pattern Interrupt</span>)</h4>
+              <p id="resultHookText">"Stop scrolling: your morning coffee routine is missing the key spark."</p>
+            </div>
+          </div>
+          <span class="ad-badge badge-primary">High Conversion Hook</span>
+        </div>
+      </div>
+
+      <!-- Top Row: Preview Player + Script Deck -->
+      <div class="results-top-grid">
+        <!-- Interactive Video Player -->
+        <div class="player-wrapper">
+          <div class="player-viewport-container">
+            <div class="aspect-frame ratio-16-9" id="aspectFrame">
+              <canvas id="previewCanvas"></canvas>
+              
+              <!-- Player HUD Overlays -->
+              <div class="player-overlay-hud">
+                <div class="hud-top-bar">
+                  <span class="hud-live-tag">
+                    <span class="pulse-dot"></span> LIVE PREVIEW
+                  </span>
+                  <span class="hud-scene-pill" id="hudScenePill">Scene 1 of 5</span>
+                </div>
+                <div class="hud-bottom-bar">
+                  <div class="hud-subtitles" id="hudSubtitles">Subtitles loading...</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Control Bar -->
+          <div class="player-controls">
+            <div class="player-scrubber-row">
+              <div class="progress-track" id="previewProgressTrack">
+                <div class="progress-fill" id="previewProgressFill"></div>
+              </div>
+            </div>
+
+            <div class="player-btn-deck">
+              <div class="deck-left">
+                <button class="play-toggle-btn" id="playPauseBtn">
+                  <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                </button>
+                <button class="btn btn-ghost btn-sm" id="restartBtn">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <polyline points="1 4 1 10 7 10"></polyline>
+                    <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                  </svg>
+                </button>
+                <span class="time-readout" id="timeReadout">0:00 / 0:30</span>
+              </div>
+
+              <div class="deck-right">
+                <button class="btn btn-ghost btn-sm" id="muteToggleBtn">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Voiceover Script Card -->
+        <div class="glass-panel script-card">
+          <div>
+            <div class="script-header">
+              <h3>
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--primary-cyan);">
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                  <line x1="12" y1="19" x2="12" y2="23"></line>
+                </svg>
+                Full Voiceover Script
+              </h3>
+              <div style="display: flex; gap: 8px;">
+                <button class="btn btn-secondary btn-sm" id="btnPlayVO">
+                  ▶ Play Voice
+                </button>
+                <button class="btn btn-secondary btn-sm" id="btnCopyScript">
+                  Copy Script
+                </button>
+              </div>
+            </div>
+
+            <div class="script-content-box" id="resultScriptContent">
+              Script loading...
+            </div>
+          </div>
+
+          <div class="script-stats">
+            <span>Words: <strong id="scriptWordCount">0</strong></span>
+            <span>Characters: <strong id="scriptCharCount">0</strong></span>
+            <span>Estimated Speech Rate: <strong>140 WPM (Optimal)</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene-by-Scene Storyboard Section -->
+      <div class="storyboard-section">
+        <div class="storyboard-header">
+          <h3>
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--primary-purple);">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+              <line x1="7" y1="2" x2="7" y2="22"></line>
+              <line x1="17" y1="2" x2="17" y2="22"></line>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <line x1="2" y1="7" x2="7" y2="7"></line>
+              <line x1="2" y1="17" x2="7" y2="17"></line>
+              <line x1="17" y1="17" x2="22" y2="17"></line>
+              <line x1="17" y1="7" x2="22" y2="7"></line>
+            </svg>
+            Scene-by-Scene Production Storyboard
+          </h3>
+          <span style="font-size: 0.85rem; color: var(--text-secondary);">Click any scene to play immediately or regenerate prompts</span>
+        </div>
+
+        <div class="scenes-grid" id="storyboardScenesGrid">
+          <!-- Dynamically injected scene cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         VIEW 4: PROJECTS / HISTORY
+         ========================================================= -->
+    <section id="view-projects" class="view-section">
+      <div class="projects-header">
+        <div>
+          <h2 style="font-size: 1.75rem; margin-bottom: 6px;">Saved Campaigns & History</h2>
+          <p style="color: var(--text-secondary);">Browse, preview, and re-export previously generated advertising campaigns.</p>
+        </div>
+
+        <div class="projects-search-bar">
+          <input type="text" id="projectsSearchInput" class="input-text" placeholder="Search by brand or concept...">
+          <button class="btn btn-primary btn-launch-studio">New Ad</button>
+        </div>
+      </div>
+
+      <div class="projects-grid" id="savedProjectsGrid">
+        <!-- Dynamically injected project cards -->
+      </div>
+    </section>
+
+    <!-- =========================================================
+         VIEW 5: ADVERTISEMENT TEMPLATES
+         ========================================================= -->
+    <section id="view-templates" class="view-section">
+      <div class="section-header" style="text-align: left; margin-bottom: 40px;">
+        <div class="section-subtitle">Curated Blueprints</div>
+        <h2 class="section-title">Pre-Engineered Advertisement Templates</h2>
+        <p style="color: var(--text-secondary);">Select an industry blueprint to preload tested marketing hooks, optimal aspect ratios, and visual styles.</p>
+      </div>
+
+      <div class="templates-grid" id="templatesGrid">
+        <!-- Dynamically injected templates -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       GLOBAL OVERLAYS & MODALS
+       ========================================================= -->
+
+  <!-- Multi-Step Generation Overlay -->
+  <div class="generation-overlay" id="generationOverlay">
+    <div class="generation-box">
+      <div class="spinner-orbit">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring-inner"></div>
+      </div>
+
+      <h3 class="step-status-text" id="genStatusText">Directing Advertisement Campaign...</h3>
+      <p class="step-subtext" id="genSubtext">Structuring narrative arc and camera motion</p>
+
+      <div class="gen-progress-bar">
+        <div class="gen-progress-bar-fill" id="genProgressFill"></div>
+      </div>
+
+      <div style="font-size: 0.75rem; color: var(--text-muted); font-family: monospace;">
+        Synthesizing storyboard & AI video prompts
+      </div>
+    </div>
+  </div>
+
+  <!-- Export Modal -->
+  <div class="modal-overlay" id="exportModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Export Advertisement Campaign</h3>
+        <button class="modal-close-btn" id="closeModalBtn">&times;</button>
+      </div>
+
+      <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 0.925rem;">
+        Export your complete storyboard, voiceover script, and scene video prompts in standard formats ready for video generation engines.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <button class="btn btn-secondary" id="btnDownloadJSON" style="justify-content: flex-start; padding: 16px;">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--primary-cyan);">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+          <div style="text-align: left; margin-left: 10px;">
+            <div style="font-weight: 700;">Download JSON Project File</div>
+            <div style="font-size: 0.775rem; color: var(--text-muted);">Complete campaign data schema for automated workflows</div>
+          </div>
+        </button>
+
+        <button class="btn btn-secondary" id="btnDownloadMD" style="justify-content: flex-start; padding: 16px;">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--primary-purple);">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+          <div style="text-align: left; margin-left: 10px;">
+            <div style="font-weight: 700;">Download Markdown Storyboard</div>
+            <div style="font-size: 0.775rem; color: var(--text-muted);">Formatted document for creative directors and client pitches</div>
+          </div>
+        </button>
+
+        <button class="btn btn-secondary" id="btnPrintStoryboard" style="justify-content: flex-start; padding: 16px;">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--primary-emerald);">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          <div style="text-align: left; margin-left: 10px;">
+            <div style="font-weight: 700;">Print / Save as PDF</div>
+            <div style="font-size: 0.775rem; color: var(--text-muted);">High-resolution print-friendly deck format</div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Script Includes -->
+  <script src="/static/js/player.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
